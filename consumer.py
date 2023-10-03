@@ -1,5 +1,8 @@
 """
-
+The consumer program is responsible for consuming the messages sent via dynamic queues based off a countries region. 
+This is leveraging multi-threading. 
+The program will then output the message into a output csv file if it meets the criteria (*Life expectancy & GDP per captia greater than the average*). 
+After the program is interrupted by the user the program will send an email to to the specified to email with the CSV files as an attachment. 
 """
 
 # import libraries
@@ -57,6 +60,10 @@ os.makedirs("output", exist_ok=True)
 shutdown_flag = False
 
 def signal_handler(signal, frame):
+    """
+    Used for catching the interruption signal and setting the shutdown_flag to True. 
+    When the user presses CTRL+C, the signal_handler function is invoked, and it updates the shutdown_flag variable. 
+    """
     global shutdown_flag
     print("\nCTRL+C detected. Preparing to shut down.")
     shutdown_flag = True

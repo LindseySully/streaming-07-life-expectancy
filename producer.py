@@ -1,8 +1,12 @@
 """
-This producer program prompts the user if they'd like to open the RabbitMQ
-Admin website to monitor the queues. It will also take the input CSV file; output an 
-intermediate file that stores all rows read from the input CSV file. 
-It delays the messages by 3 seconds each.
+Written by Lindsey Sullivan
+Util_logger written by Denise Case
+
+Date: October 2nd, 2023
+
+The producer is responsible for sending messages to the appropriate queue based on the Region name for the country it will evaluate. 
+This program leverages an intermediate_file_name to store the processed messages from the original CSV file. 
+Additionally, users have the option to monitor the queue via a prompt to open the RabbitMQ Admin web page. 
 """
 
 # import libraries
