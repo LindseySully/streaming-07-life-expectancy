@@ -1,5 +1,8 @@
 """
-
+This producer program prompts the user if they'd like to open the RabbitMQ
+Admin website to monitor the queues. It will also take the input CSV file; output an 
+intermediate file that stores all rows read from the input CSV file. 
+It delays the messages by 3 seconds each.
 """
 
 # import libraries
@@ -39,7 +42,8 @@ def offer_rabbitmq_admin_site(show_offer):
 
 def send_to_queue(host, queue_name, message):
     """
-    
+    Establishes a connection
+    Messages are delivered persistently to ensure that if RabbitMQ fails or restarts it will not be lost.
     """
     conn = pika.BlockingConnection(pika.ConnectionParameters(host))
     channel = conn.channel()
@@ -88,7 +92,7 @@ def stream_csv_messages(input_file_name: str, intermediate_file_name: str, host:
                 send_to_queue(host, queue_name, message)
                 logger.info(f"Sent message for {country} to {queue_name}")
 
-                time.sleep(1)
+                time.sleep(3) # delay messages by 3 seconds
 
             logger.info(f"Data written to {intermediate_file_name}")
 
